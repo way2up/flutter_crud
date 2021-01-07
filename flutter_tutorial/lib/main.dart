@@ -23,6 +23,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomePageState extends State<Home> {
+  var _uploadImage;
+  int userIndex = 0;
+
+  bool showEditUser = false;
+  bool showAddUser = false;
+  final picker = ImagePicker();
+  String userName = 'Text';
+  String userImage = 'assets/images/1.jpg';
+
   List userList = [
     {
       'userName': 'Tom',
@@ -42,15 +51,6 @@ class _HomePageState extends State<Home> {
     },
   ];
 
-  var _uploadImage;
-  int userIndex = 0;
-
-  bool showEditUser = false;
-  bool showAddUser = false;
-  final picker = ImagePicker();
-  String userName = 'Text';
-  String userImage = 'assets/images/1.jpg';
-
 // edit
   editUser() {
     setState(() {
@@ -63,6 +63,7 @@ class _HomePageState extends State<Home> {
     setState(() {
       _uploadImage = File(image.path);
       userList[userIndex]['userImage'] = _uploadImage.path;
+      print(_uploadImage.path);
     });
   }
 
@@ -86,6 +87,8 @@ class _HomePageState extends State<Home> {
     };
     setState(() {
       userList.add(object);
+      userName = 'Text';
+      userImage = 'assets/images/1.jpg';
     });
   }
 
@@ -106,6 +109,7 @@ class _HomePageState extends State<Home> {
   void onPageChange(int index, CarouselPageChangedReason changeReason) {
     setState(() {
       userIndex = index;
+      print(context);
       // reason = changeReason.toString();
     });
   }
